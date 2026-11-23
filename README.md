@@ -79,6 +79,8 @@ See  Random Number Generator.md for description of the RNG we use. Since the RNG
 
 The RNG is seeded with the UID from the bind.
 
+The RNG is used only for the initial setup of the random band table and transmission period. This should happen in the Transmitter when starting communication with a specific receiver, including immediately after the bind is completed, and in the Receiver when starting and immediately after the bind is completed.
+
 We shuffle the 80 bands with the Fisher-Yates shuffle as follows:
 
 ```
