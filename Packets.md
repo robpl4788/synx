@@ -146,7 +146,7 @@ When providing the name of a setting that is represented as an enum, Enum Index 
 | Position | Name | Description |
 | ---- | ---- | ---- |
 | 1:7-6 | Setting Number of Bytes  | n = 00:1, 01:2, 10:4, 11:11 |
-| 1:5-0 | Setting Index | 63 is reserved |
+| 1:5-0 | Setting Index | 0 -> 60 |
 | 2 -> (2 + n - 1) | Setting Value | |
 
 Number of Bytes, Index and Value sets can be repeated to fill 13 bytes total.
@@ -163,6 +163,6 @@ Request/provide the current value of a specific setting.
 | Position | Name | Description |
 | ---- | ---- | ---- |
 | 1:7-6 | Setting Number of Bytes  | n = 00:1, 01:2, 10:4, 11:11 |
-| 1:5-0 | Setting Index | 63 is reserved |
+| 1:5-0 | Setting Index | 0 -> 60 |
 | 2:0 | Request? | 1 = Requesting, 0 = Providing |
 | 3 -> (3 + n - 1) | Setting Value | |
