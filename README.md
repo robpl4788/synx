@@ -59,19 +59,16 @@ To enable transmitters to display in a standard way we expect some standard valu
 
 ## Expected Logged Values
 
-### Battery Voltage
-
-| Logged Value Index | Name | Type | Size |
-|--------------------|------|------|------|
-| 0 | Vbat | Float | 2 Bytes |
+| Logged Value Index | Name | Type | Size | Notes |
+|--------------------|------|------|------|-------|
+| 0 | Vbat | Float | 2 Bytes | Battery Voltage |
 
 ## Expected Settings
 
-### Receiver Name
-
-| Setting Index | Name | Type | Size |
-|--------------------|------|------|------|
-| 0 | Rx Name | String | 11 Bytes |
+| Setting Index | Name | Type | Size | Notes |
+|---------------|------|------|------|-------|
+| 0 | Setting Cnt | Int | 1 Byte | Read Only |
+| 1 | Rx Name | String | 11 Bytes |
 
 # Random Number Generator Usage
 
