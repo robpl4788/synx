@@ -106,7 +106,10 @@ When the transmitter requests the name of a logged value, use type as 00, fill n
 
 Logged Value Names are strings and cannot be empty (so cannot be all 0's).
 
+If an invalid index is requested, respond with 00 for Logged Value Type and an empty string (all 0's).
+
 # Bind Request/Accept (3)
+
 If not in bind mode, do not respond to a bind request.
 
 If no telemetry is requested, a bind accept is still required, but no normal responses should be given (so the only packet such a receiver would ever send is a Bind Response).
@@ -114,21 +117,21 @@ If no telemetry is requested, a bind accept is still required, but no normal res
 A bind request packet uses a UID of 0 for CRC purposes. Bind accepts should use the correct UID for CRC.
 
 | Position | Name | Description |
-| ---- | ---- | ---- |
+| -------- | ---- | ----------- |
 | 1 | Protocol Version | As uint. Version described in this document is 1 |
 | 2 -> 5 | Unique Id | As 4 byte unsigned int |
 | 6:1 | Telemetry yes/no | Yes = 1, No = 0 |
 | 6:0 | Accept/Request | Accept = 1, Request = 0 |
 
-The Transmitter should choose a fully random non-zero UID.
-
+The Transmitter should choose a fully random non-zero UID. For Telemetry, the existing UID of the already specified receiver is used.
 
 
 # Setting Name (4)
+
 Request/provide the name of a specific setting or enum value.
 
 | Position | Name | Description |
-| ---- | ---- | ---- |
+| -------- | ---- | ----------- |
 | 1:7 | Request? | 1 = Requesting, 0 = Providing |
 | 1:6 | Enum? | 1 = Enum, 0 = Setting |
 | 1:5-0 | Setting Index | 0 -> 60 |
@@ -144,14 +147,14 @@ When providing the name of a setting that is represented as an enum, Enum Index 
 # Apply Setting (5)
 
 | Position | Name | Description |
-| ---- | ---- | ---- |
+| -------- | ---- | ----------- |
 | 1:7-6 | Setting Number of Bytes  | n = 00:1, 01:2, 10:4, 11:11 |
 | 1:5-0 | Setting Index | 0 -> 60 |
 | 2 -> (2 + n - 1) | Setting Value | |
 
 Number of Bytes, Index and Value sets can be repeated to fill 13 bytes total.
 
-Fill with 0xFF (which is invalid as a Logged Value Index).
+Fill with 0xFF (which is invalid as a Setting Index).
 
 Setting Index 0 is the total number of available settings. This is read only, and writes should not be attempted.
 
@@ -161,8 +164,10 @@ Typically a transmitter will request Apply Setting when commanding Apply Setting
 Request/provide the current value of a specific setting.
 
 | Position | Name | Description |
-| ---- | ---- | ---- |
+| -------- | ---- | ----------- |
 | 1:7-6 | Setting Number of Bytes  | n = 00:1, 01:2, 10:4, 11:11 |
 | 1:5-0 | Setting Index | 0 -> 60 |
 | 2:0 | Request? | 1 = Requesting, 0 = Providing |
 | 3 -> (3 + n - 1) | Setting Value | |
+
+If requesting, fill the Setting Value with 0's.
