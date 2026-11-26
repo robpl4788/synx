@@ -23,6 +23,11 @@ In normal operation, the transmitter will cycle through an 80 band loop, changin
 
 If a reciever does not recieve packets for a given timeout period (not defined here, different recievers can use different timeouts) the reciever should wait on a given band until it sees a new valid packet from the transmitter, at which point it can resume operation. The transmitter always continues on the band loop.
 
+## Bands
+There are 80 available bands, each of which are centered on a given frequency. Each band is 1 MHz apart. The first band is centered on 2.402 GHz
+
+The bind band is centered on 2.423 GHz.
+
 ## Timing
 The transmitter sends out packets at a constant rate as defined by the Target Transmission Period.
 
